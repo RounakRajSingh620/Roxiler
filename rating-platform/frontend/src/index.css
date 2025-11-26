@@ -1,0 +1,257 @@
+/* Tailwind entry points (keep these) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------
+   Global resets & page bg
+   --------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #111827;
+}
+
+/* Reduce maximum stretch on wide screens so layout doesn't feel blown out.
+   This makes your dashboard narrower and centered (user requested). */
+.max-w-7xl { max-width: 1100px; }   /* override Tailwind's huge value */
+.max-w-6xl { max-width: 1000px; }
+.max-w-5xl { max-width: 900px; }
+.max-w-2xl { max-width: 720px; }
+
+/* ---------------------------
+   Card system & spacing
+   --------------------------- */
+.card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 7px;
+  box-shadow: 0 8px 20px rgba(10, 11, 13, 0.06);
+  transition: box-shadow .25s ease, transform .18s ease;
+  margin-bottom: 20px; /* add gap between cards (important) */
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: visible;
+}
+
+/* stronger hover for interactive cards */
+.card:hover {
+  box-shadow: 0 18px 40px rgba(10, 11, 13, 0.08);
+  transform: translateY(-3px);
+}
+
+/* title-row: header icon + title placed inline and vertically centered */
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* header icon size and background circular */
+.title-row svg {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 4px;
+  color: #0ea5e9; /* primary tint for icon */
+}
+
+/* Page heading spacing */
+h1 {
+  line-height: 1.05;
+}
+
+/* ---------------------------
+   Stat cards grid adjustments
+   --------------------------- */
+.grid > .card { /* ensure grid children get consistent padding and spacing */
+  padding: 5px;
+}
+
+/* small responsive tweak: limit stat card inner content width */
+.card .text-3xl { font-size: 1.25rem; }
+
+/* ---------------------------
+   Inputs, labels & icons
+   --------------------------- */
+
+/* Make labels block-level and position: relative so any absolute icon inside label
+   is contained inside the label (prevents icons from drifting into inputs/textarea). */
+label {
+  display: block;
+  position: relative; /* CRITICAL: prevents icon overlay onto input/textarea */
+  padding-left: 36px;  /* leave room for inline label icon placed at left */
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+/* If you used svg icons inside label with tailwind classes like "absolute left-3 top-3.5",
+   these rules ensure they sit to the left of the label text (not over inputs). */
+label > svg, label > i {
+  position: absolute;
+  left: 0.5rem;           /* matches visual left padding */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;         /* text-gray-500 */
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Input & textarea base styles (used by .input-field class in your JSX) */
+.input-field {
+  width: 100%;
+  display: block;
+  padding: 12px 14px;    /* default padding */
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #111827;
+  transition: box-shadow .12s ease, border-color .12s ease, transform .12s ease;
+  background: #fff;
+  line-height: 1.25;
+  resize: vertical;
+}
+
+/* Padding-left applied in JSX via 'pl-10' tailwind — keep it, and ensure our rule doesn't break it.
+   For any inputs that have an icon inside the input (absolute inside the input container),
+   ensure they still have left padding: the JSX already sets pl-10; this rule keeps things consistent. */
+.input-field.pl-10 { padding-left: 2.5rem; }
+
+/* Focus state */
+.input-field:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 6px rgba(14,165,233,0.07);
+  outline: none;
+}
+
+/* Larger textareas */
+.min-h-20 { min-height: 160px; }
+
+/* ensure textarea lines don't show icon behind them */
+textarea.input-field { line-height: 1.4; }
+
+/* If any svg icons are inside .relative wrappers (input icons), ensure they are absolutely placed
+   relative to that parent. We assume your input wrapper has class "relative". */
+.relative { position: relative; }
+.relative > svg {
+  position: absolute;
+  left: 0.9rem;           /* small left inset */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* If label contains SVG *and* you want the icon next to the subtitle (label) — label SVG has been handled above.
+   This prevents label SVG from overlapping the input/textarea below it. */
+
+/* ---------------------------
+   Buttons
+   --------------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0284c7; /* primary-600 */
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(2,132,199,0.12);
+  border: none;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+
+.btn-primary:hover { transform: translateY(-2px); background-color: #0369a1; }
+.btn-primary:active { transform: translateY(0); }
+
+/* secondary button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e7eb;
+  color: #111827;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* ---------------------------
+   Lists / Action rows spacing
+   --------------------------- */
+/* make quick-action buttons / rows visually separate */
+.card > .grid, .card > .stack {
+  gap: 12px;
+}
+
+/* ActionCard internal spacing (in case Tailwind spacing classes are missing) */
+.card .flex.items-start { gap: 12px; }
+
+/* ---------------------------
+   Navbar & header tweaks
+   --------------------------- */
+nav.bg-white {
+  background: rgba(255,255,255,0.96);
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* right-side small user text in navbar */
+nav .text-sm { font-size: .9rem; }
+
+/* ---------------------------
+   Spinner and misc
+   --------------------------- */
+.spinner {
+  border: 4px solid rgba(0,0,0,0.08);
+  border-left-color: #667eea;
+  border-radius: 9999px;
+  width: 36px;
+  height: 36px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------------------------
+   Responsive touchups
+   --------------------------- */
+@media (max-width: 768px) {
+  .title-row { gap: 8px; }
+  label { padding-left: 32px; }
+  label > svg { left: 0.4rem; }
+  .card { padding: 16px; }
+  .max-w-7xl { padding-left: 16px; padding-right: 16px; }
+}
+
+/* ---------------------------
+   Helpful debug comments
+   --------------------------- */
+/*
+ Notes:
+ - Key fix for the icon-overlap: label { position: relative } ensures any icon placed INSIDE the <label>
+   (for example your JSX uses <label><Icon/> Some text</label>) will sit next to the label instead of
+   absolutely positioning relative to the page/document. This prevents those icons from floating down
+   into the textarea or input.
+ - Gap between cards is provided by .card { margin-bottom: 20px } and consistent padding on .card.
+ - Max width reductions stop the dashboard stretching too wide on large screens.
+ - Inputs use .input-field; you already set pl-10 via Tailwind in JSX — we preserve that and provide a
+   focused ring + shadow.
+*/
