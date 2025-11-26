@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+ "import-db": "mysql -u root -p < ../rating-platform.sql"
   },
   "engines": {
     "node": ">=18.0.0"
