@@ -7,7 +7,7 @@ import bcrypt from 'bcryptjs';
 const router = express.Router();
 
 // Secret key to prevent unauthorized access
-const SETUP_SECRET = 'your-secret-setup-key-12345';
+const SETUP_SECRET = '12345';
 
 router.post('/initialize', async (req, res) => {
   try {
