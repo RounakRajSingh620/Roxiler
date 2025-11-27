@@ -4,7 +4,6 @@ A full-stack web application for managing stores and user ratings with role-base
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://roxiler-cyan.vercel.app/)
 [![Backend API](https://img.shields.io/badge/Backend-API-blue)](https://roxiler-5cq0.onrender.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## 🌐 Live Links
 
@@ -255,14 +254,6 @@ Content-Type: application/json
 GET /stores
 Authorization: Bearer <token>
 
-Query Parameters:
-- name (optional): Filter by store name
-- email (optional): Filter by email
-- address (optional): Filter by address
-- sortBy (optional): name | email | address | rating
-- sortOrder (optional): asc | desc
-```
-
 #### Create Store (Admin Only)
 ```http
 POST /stores
@@ -331,14 +322,6 @@ Content-Type: application/json
 GET /users
 Authorization: Bearer <token>
 
-Query Parameters:
-- name (optional): Filter by name
-- email (optional): Filter by email
-- address (optional): Filter by address
-- role (optional): admin | user | store_owner
-- sortBy (optional): name | email | address | role | created_at
-- sortOrder (optional): asc | desc
-```
 
 #### Get User Details (Admin Only)
 ```http
